@@ -1,0 +1,20 @@
+{
+"ci": {
+  "server": {
+    "port": 9001,
+    "storage": {
+      "storageMethod": "sql",
+      "sqlDialect": "mysql",
+      "sqlConnectionUrl": "mysql://lighthouse:lighthousepwd@mysql:3306/lighthousedb",
+      "sqlConnectionSsl": false
+    },
+    "deleteOldBuildsCron": [
+      {
+        "schedule" : "0 * * * *",
+        "maxAgeInDays": 7,
+        "skipBranches": ["master"]
+      }
+    ]
+  }
+}
+}

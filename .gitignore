@@ -1,0 +1,19 @@
+.DS_Store
+node_modules
+
+# Editor directories and files
+.idea/*
+*/.idea/*
+!.idea/runConfigurations
+.vscode
+.history
+
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+*.orig
+/.nyc_output
+*.env

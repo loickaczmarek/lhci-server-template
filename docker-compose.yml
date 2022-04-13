@@ -1,0 +1,25 @@
+version: '3'
+services:
+  lhserver-local:
+    user: '${ADN_UID:-0}:${ADN_GID:-0}'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /
+    ports:
+      - '9001:9001'
+    volumes:
+      - ./lighthouserc.json:/usr/src/lhci/config/lighthouserc.json
+    command: |
+      /bin/sh -c "yarn install && yarn global add @lhci/cli@0.9.x && yarn global add @lhci/server@0.9.x \
+      && yarn global add mysql2 \
+      && npx lhci server --config=/usr/src/lhci/config/lighthouserc.json"
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd    
+      MYSQL_DATABASE: lighthousedb
+      MYSQL_USER: lighthouse
+      MYSQL_PASSWORD: lighthousepwd
